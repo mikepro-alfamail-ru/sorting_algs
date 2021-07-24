@@ -73,4 +73,4 @@ if __name__ == '__main__':
 
     print(insert_sort(MASSIVE.copy()))
     print(merge_sort(MASSIVE.copy()))
-    print(quick_sort(MASSIVE, 0, len(MASSIVE)))
+    print(quick_sort(MASSIVE, 0, N))
