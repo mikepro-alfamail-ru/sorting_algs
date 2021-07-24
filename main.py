@@ -1,7 +1,8 @@
 # Алгоритмы сортировки
 from random import randint
+import time
 
-N = 10000
+N = 400000
 MASSIVE = [randint(0, N) for i in range(N)]
 
 
@@ -67,10 +68,46 @@ def quick_sort(massive, start, end):
         quick_sort(massive, center, end)
     return massive
 
+def count_sort(massive):
+    count_massive = [0 for i in range(len(massive) + 1)]
+    for a in massive:
+        count_massive[a] += 1
+
+    index = 0
+    for enum, a in enumerate(count_massive):
+        for i in range(a):
+            massive[index] = enum
+            index += 1
+    return massive
+
 
 if __name__ == '__main__':
-    print(MASSIVE)
+    # print(MASSIVE)
+    # t0 = time.time()
+    #
+    # a = insert_sort(MASSIVE.copy())
+    # t1 = time.time() - t0
+    # print('insert - ', t1)
+    # t0 = time.time()
 
-    print(insert_sort(MASSIVE.copy()))
-    print(merge_sort(MASSIVE.copy()))
-    print(quick_sort(MASSIVE, 0, N))
+    t0 = time.time()
+
+    a = merge_sort(MASSIVE.copy())
+    t1 = time.time() - t0
+    print('merge - ', t1)
+    # print(a)
+
+    t0 = time.time()
+
+    a = quick_sort(MASSIVE.copy(), 0, N)
+    t1 = time.time() - t0
+    print('quick - ', t1)
+    # print(a)
+
+    t0 = time.time()
+
+    a = count_sort(MASSIVE.copy())
+
+    t1 = time.time() - t0
+    print('count - ', t1)
+    # print(a)
