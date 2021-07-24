@@ -2,12 +2,27 @@
 from random import randint
 import time
 
-N = 400000
+N = 1000
 MASSIVE = [randint(0, N) for i in range(N)]
 
 
-def insert_sort(massive: list):
+def bubble_sort(massive):
+    # Сортировка пузырьком
+
+    n = len(massive)
+    for i in range(1, n):
+        finish = True
+        for j in range(n - i):
+            if massive[j] > massive[j + 1]:
+                massive[j], massive[j + 1] = massive[j + 1], massive[j]
+                finish = False
+        if finish:
+            break
+    return massive
+
+def insert_sort(massive):
     # Сортировка вставкой
+
     for i in range(1, N):
         key = massive[i]
         j = i - 1
@@ -50,6 +65,7 @@ def merge_sort(massive: list):
 
 
 def quick_sort(massive, start, end):
+    # Быстрая сортировка
 
     def partition(massive, start, end):
         result = start
@@ -69,6 +85,8 @@ def quick_sort(massive, start, end):
     return massive
 
 def count_sort(massive):
+    # Сортировка подсчетом
+
     count_massive = [0 for i in range(len(massive) + 1)]
     for a in massive:
         count_massive[a] += 1
@@ -82,32 +100,39 @@ def count_sort(massive):
 
 
 if __name__ == '__main__':
-    # print(MASSIVE)
+    print(MASSIVE)
+    t0 = time.time()
+
+    a = insert_sort(MASSIVE.copy())
+    t1 = time.time() - t0
+    print('insert - ', t1)
+    # print(a)
+
+    t0 = time.time()
+
+    a = bubble_sort(MASSIVE.copy())
+    t1 = time.time() - t0
+    print('bubble - ', t1)
+    # print(a)
+
     # t0 = time.time()
     #
-    # a = insert_sort(MASSIVE.copy())
+    # a = merge_sort(MASSIVE.copy())
     # t1 = time.time() - t0
-    # print('insert - ', t1)
+    # print('merge - ', t1)
+    # # print(a)
+    #
     # t0 = time.time()
-
-    t0 = time.time()
-
-    a = merge_sort(MASSIVE.copy())
-    t1 = time.time() - t0
-    print('merge - ', t1)
-    # print(a)
-
-    t0 = time.time()
-
-    a = quick_sort(MASSIVE.copy(), 0, N)
-    t1 = time.time() - t0
-    print('quick - ', t1)
-    # print(a)
-
-    t0 = time.time()
-
-    a = count_sort(MASSIVE.copy())
-
-    t1 = time.time() - t0
-    print('count - ', t1)
-    # print(a)
+    #
+    # a = quick_sort(MASSIVE.copy(), 0, N)
+    # t1 = time.time() - t0
+    # print('quick - ', t1)
+    # # print(a)
+    #
+    # t0 = time.time()
+    #
+    # a = count_sort(MASSIVE.copy())
+    #
+    # t1 = time.time() - t0
+    # print('count - ', t1)
+    # # print(a)
